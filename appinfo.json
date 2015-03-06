@@ -1,0 +1,51 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "maikleenards@gmail.com",
+    "longName": "Efteling Wachttijden App",
+    "projectType": "pebblejs",
+    "resources": {
+        "media": [
+            {
+                "file": "images/menu_icon.png",
+                "name": "IMAGE_MENU_ICON",
+                "type": "png"
+            },
+            {
+                "file": "images/logo_splash.png",
+                "name": "IMAGE_LOGO_SPLASH",
+                "type": "png"
+            },
+            {
+                "file": "images/tile_splash.png",
+                "name": "IMAGE_TILE_SPLASH",
+                "type": "png"
+            },
+            {
+                "file": "fonts/UbuntuMono-Regular.ttf",
+                "name": "MONO_FONT_14",
+                "type": "font"
+            },
+            {
+                "file": "images/efteling_banner.png",
+                "name": "IMAGES_EFTELING_BANNER_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/efteling_logo.png",
+                "menuIcon": true,
+                "name": "IMAGES_EFTELING_LOGO_PNG",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "Efteling App",
+    "uuid": "0e6f2cec-3c44-4f72-9e48-19a89a74dda8",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
