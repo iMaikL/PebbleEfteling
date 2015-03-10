@@ -1,6 +1,6 @@
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+A small Pebble Watchapp that makes your day in the Efteling even more fun. Check waitingtimes realtime on your wrist.
 
 ## Code Example
 
@@ -8,7 +8,7 @@ Show what the library does as concisely as possible, developers should be able t
 
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+I love the Efteling and found out that I can use the data for projects. This project is also set up to learn more about writing JavaScript on a fun way. I think I'll learn JavaScript better when I do a project I really like and is created from bottom to top by myself. 
 
 ## Installation
 
@@ -16,7 +16,9 @@ Provide code examples and explanations of how to get the project.
 
 ## API Reference
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+Normally I would use the API from www.eftelstats.nl. Since the admin of that site said the API is unstable and so he's not sending out API keys I found out I can use the direct fetch from the Efteling servers. I only use this link for test purposes only and will not put the app on the Pebble Appstore with data pulled from this fetch. 
+
+You can find the fetch here: http://www.nickd.nl/maik/efteling.php
 
 ## Tests
 
