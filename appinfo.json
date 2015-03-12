@@ -29,6 +29,26 @@
                 "type": "font"
             },
             {
+                "file": "images/icon_informatie.png",
+                "name": "IMAGES_ICON_INFORMATIE_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/icon_ticket.png",
+                "name": "IMAGES_ICON_TICKET_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/icon_fork.png",
+                "name": "IMAGES_ICON_FORK_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/icon_coffee.png",
+                "name": "IMAGES_ICON_COFFEE_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/efteling_banner.png",
                 "name": "IMAGES_EFTELING_BANNER_PNG",
                 "type": "png"
