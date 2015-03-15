@@ -110,8 +110,68 @@ var parseFeed = function(data, quantity, type, rijk) {
       case 'hetwittepaard':
         attraction = 'Het Witte Paard';
         break;
-      case 'casacaracol':
-        attraction = 'Casa Caracol';
+      case 'globetrotter':
+        attraction = 'Globetrotter';
+        break;
+      case 'rondjevandemolen':
+        attraction = 'Rondje Van De Molen ';
+        break;
+      case 'degebrandeboon':
+        attraction = 'De Gebrande Boon';
+        break;
+      case 'polleskeuken':
+        attraction = 'Polles Keuken';
+        break;
+      case 'tokopagode':
+        attraction = 'Toko Pagode';
+        break;
+      case 'demeermin':
+        attraction = 'De Meermin';
+        break;
+      case 'oase':
+        attraction = 'Oase';
+        break;
+      case 'dekombuys':
+        attraction = 'De Kombuys';
+        break;
+      case 'octopus':
+        attraction = 'Octopus';
+        break;
+      case 'devrolijkenoot':
+        attraction = 'De Vrolijke Noot';
+        break;
+      case 'desteenbok':
+        attraction = 'De Steenbok';
+        break;
+      case 'burgerbackerij':
+        attraction = 'Burgerbackerij ';
+        break;
+      case 'wittewalvis':
+        attraction = 'Witte Walvis';
+        break;
+      case 'hetseylendfregat':
+        attraction = 'Het Seylend Fregat';
+        break;
+      case 'smulpaap':
+        attraction = 'Smulpaap';
+        break;
+      case 'denguldengaarde':
+        attraction = 'De Gulden Gaarde';
+        break;
+      case 'grootmoederskeuken':
+        attraction = 'Grootmoeders Keuken';
+        break;
+      case 'gelaarsdekat':
+        attraction = 'Gelaarsde Kat';
+        break;
+      case 'hoorndesovervloeds':
+        attraction = 'Hoorn Des Overvloeds ';
+        break;
+      case 'kleyneklaroen':
+        attraction = 'Kleyne Klaroen ';
+        break;
+      case 'theaterrestaurantapplaus':
+        attraction = 'Theater Restaurant Applaus';
         break;
         
       //Hernoem shows met nettere namen
@@ -155,6 +215,23 @@ var parseFeed = function(data, quantity, type, rijk) {
       case 'eftelingmuseum':
         skip = true;
         break;
+        
+      //Skip horeca die niet van toegevoegde waarde is
+      case 'loreleyaquanuraarrangement':
+        skip = true;
+        break;
+      case 'welkom':
+        skip = true;
+        break;
+      case 'happinessstationpk':
+        skip = true;
+        break;
+      case 'happinessstationwp':
+        skip = true;
+        break;
+      case 'hollandsegebakskraam':
+        skip = true;
+        break;
     }
     
     if(skip) {
@@ -180,13 +257,6 @@ var parseFeed = function(data, quantity, type, rijk) {
     
     // Always upper case the description string
     waitingtime = waitingtime.charAt(0).toUpperCase() + waitingtime.substring(1);
-
-    // Make an icon for the subtitle
-//     var iconTime = new UI.Image({
-//       position: new Vector2(0, 0),
-//       size: new Vector2(16, 16),
-//       image: 'images/icon_informatie.png'
-//     });
     
     // Add to menu items array
     items.push({
