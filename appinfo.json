@@ -29,6 +29,11 @@
                 "type": "font"
             },
             {
+                "file": "images/success_banner.png",
+                "name": "IMAGES_SUCCESS_BANNER_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/icon_informatie.png",
                 "name": "IMAGES_ICON_INFORMATIE_PNG",
                 "type": "png"

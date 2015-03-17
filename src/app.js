@@ -8,6 +8,8 @@
 
 var UI = require('ui');
 var ajax = require('ajax');
+var Accel = require('ui/accel');
+var Vibe = require('ui/vibe');
 //var Vector2 = require('vector2');
 var parseFeed = function(data, quantity, type, rijk) {
   var items = [];
@@ -15,7 +17,6 @@ var parseFeed = function(data, quantity, type, rijk) {
   for(var i=0; i < data.AttractionInfo.length; i++){
     var AttractionInfo = data.AttractionInfo[i];
     
-    //console.log(JSON.stringify(AttractionInfo));
     if(type != AttractionInfo.Type) {
       continue;
     }
@@ -243,10 +244,12 @@ var parseFeed = function(data, quantity, type, rijk) {
 
     // Get waitingtimes
     var waitingtime = AttractionInfo.State;
+    var waitingnumber = AttractionInfo.WaitingTime;
     
     // If statement. Als de attractie gesloten is, laat "gesloten" zien. Anders laat de wachttijd zien.
     if (AttractionInfo.State == 'gesloten') {
       waitingtime = AttractionInfo.State;
+      waitingnumber = 0;
     }else{
       waitingtime = AttractionInfo.WaitingTime + " minutes";
     }
@@ -255,16 +258,25 @@ var parseFeed = function(data, quantity, type, rijk) {
       waitingtime = AttractionInfo.State;
     }
     
+    if (AttractionInfo.State == 'open' && !AttractionInfo.WaitingTime && AttractionInfo.Type == 'Attraction') {
+      waitingtime = '0 minuten';
+    }
+    
     // Always upper case the description string
     waitingtime = waitingtime.charAt(0).toUpperCase() + waitingtime.substring(1);
-    
+   
     // Add to menu items array
     items.push({
       title:attraction,
-      subtitle:waitingtime
+      subtitle:waitingtime,
+      waitingnumber: waitingnumber
     });
   }
-
+  
+  //sorteer items hoog naar laag
+  items.sort(function(a,b) {
+    return b.waitingnumber - a.waitingnumber;
+  });
   // Finally return whole array
   return items;
 };
@@ -293,7 +305,7 @@ ajax(
     console.log("Successfully fetched wachttijden data!");
     
     // Create an array of Menu items
-    //var attractionItems = parseFeed(data, 50, 'Attraction');
+    var attractionItems = parseFeed(data, 50, 'Attraction');
     var showItems = parseFeed(data, 10, 'Show');
     var horecaItems = parseFeed(data, 50, 'Horeca');
     var marerijkItems = parseFeed(data, 20, 'Attraction', 'marerijk');
@@ -324,6 +336,8 @@ ajax(
     var rijkenMenu = new UI.Menu({
       sections: [{
         items: [{
+          title: 'Alle Attracties'
+        }, {
           title: 'Marerijk'
         }, {
           title: 'Reizenrijk'
@@ -348,12 +362,12 @@ ajax(
     var openingstijdPark = OpenVan + ' tot ' + OpenTot;
     
     // Construct Menu to show to user when attractions is chosen in main menu
-//     var resultsMenu = new UI.Menu({
-//       sections: [{
-//         title: 'Huidige Wachttijden',
-//         items: attractionItems
-//       }]
-//     });
+    var resultsMenu = new UI.Menu({
+      sections: [{
+        title: 'Huidige Wachttijden',
+        items: attractionItems
+      }]
+    });
     
     // Construct Menu to show to user when marerijk is chosen in main menu
     var marerijkMenu = new UI.Menu({
@@ -424,19 +438,71 @@ ajax(
     // Add an action for SELECT on the rijkenmenu
     rijkenMenu.on('select', function(e) {
     if(e.itemIndex === 0) {
+    resultsMenu.show();
+    }
+    if(e.itemIndex === 1) {
     marerijkMenu.show();
-    } else if(e.itemIndex == 1) {
-    reizenrijkMenu.show();
     } else if(e.itemIndex == 2) {
-    ruigrijkMenu.show();
+    reizenrijkMenu.show();
     } else if(e.itemIndex == 3) {
+    ruigrijkMenu.show();
+    } else if(e.itemIndex == 4) {
     anderrijkMenu.show();
     }
     });
     
+////////////////    
+/*TAP EVENT*////    
+//////////////// 
+    
+    // Register for 'tap' events
+    mainMenu.on('accelTap', function(e) {
+    // Make another request to data for the 'tap' event
+      ajax(
+        {
+          url: 'http://www.nickd.nl/maik/efteling.php',
+          type: 'json'
+        },
+        function(data) {
+          // Splash screen while waiting for data
+          var SuccessWindow = new UI.Card({
+            banner: 'images/success_banner.png',
+          });
+          
+          // Display the screen
+          SuccessWindow.show();
+          
+          // Create an array of Menu items
+          var newItems = parseFeed(data, 100);
+          
+          // Update the Menu's first section
+          mainMenu.items(4, newItems);
+          console.log('Geupdate!');
+          console.log(newItems);
+                                                 
+          // Notify the user
+          Vibe.vibrate('short');
+          
+          //laat een popup zien dat t goed is gegaan
+          setTimeout(function() {
+          // Hide the screen
+          SuccessWindow.hide();
+          }, 1500);
+
+        },
+        function(error) {
+          console.log('Download failed: ' + error);
+        }
+      );
+    });
+    // end tap event
+  
   },
   function(error) {
     // Failure!
     console.log('Download failed' + error);
   }
 );
+
+// Prepare the accelerometer
+Accel.init();
