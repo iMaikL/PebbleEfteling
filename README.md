@@ -22,7 +22,7 @@ You can find the fetch here: http://www.nickd.nl/maik/efteling.php
 
 ## Tests
 
-Describe and show how to run the tests with code examples.
+Tests for this application are mostly done with the build-in console in CloudPebble using console.log(); and also testing on the device itself.
 
 ## Contributors
 
